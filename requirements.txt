@@ -1,0 +1,13 @@
+py-cord
+requests
+asyncio
+aihhttp
+colorama
+termcolor
+datatime
+os
+logging
+discord
+
+- do pip install then the thing
+you need python to use
